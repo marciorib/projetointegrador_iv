@@ -5,7 +5,21 @@
 #Captura a posição em tempo real dos ônibus dessa linha.
 #Salva os dados em um CSV para você analisar depois.
 
+# codigo (abaixo)
 
+#O que esse script faz ---------------------------------------------------
+
+#Faz login com seu token da SPTrans.
+#Procura a linha de ônibus (exemplo: 8000).
+#Pega todos os ônibus em circulação dessa linha, com prefixo, latitude, longitude.
+#Marca a hora da coleta.
+#Salva em CSV (exemplo: onibus_linha_8000.csv).
+
+#A partir daqui você pode:  ----------------------------------------------------
+
+#Rodar o script várias vezes ao longo do dia e ir acumulando dados.
+#Usar esses CSVs para treinar um modelo de ML (previsão de chegada, análise de atrasos, etc.).
+#Criar uma interface com Streamlit mostrando os ônibus num mapa interativo.
 
 
 
