@@ -1,0 +1,92 @@
+
+
+''' Dashboard SPTrans – Ônibus em Tempo Real
+
+Este projeto é um dashboard interativo desenvolvido em Python com Streamlit para visualização de dados de ônibus em tempo real na cidade de São Paulo.
+
+Funcionalidades principais:
+
+Visualização no mapa: exibe a localização dos ônibus filtrados por linhas, com cores diferentes para cada linha.
+
+Filtros interativos: permite selecionar quais linhas exibir, melhorando a exploração dos dados.
+
+Indicadores principais (cards): mostra total de ônibus ativos, quantidade de linhas selecionadas e horário da última coleta.
+
+Gráfico de horários: apresenta a distribuição de ônibus ao longo do dia.
+
+Legendas dinâmicas: cores das linhas podem ser exibidas em um painel expansível, mantendo o dashboard limpo mesmo com muitas linhas.
+
+Design customizado: interface escura com cores destacadas, melhorando a experiência do usuário.
+
+Objetivo:
+Facilitar a monitorização em tempo real da frota de ônibus, ajudando em análises operacionais e tomada de decisão baseada em localização e horários. '''
+
+
+
+''' Resumo
+
+O Dashboard SPTrans é uma aplicação interativa em Streamlit que mostra a localização de ônibus em tempo real em São Paulo. Permite filtrar linhas, 
+visualizar indicadores principais, acompanhar horários e consultar a legenda das linhas de forma dinâmica. O objetivo é facilitar a monitorização da 
+frota e apoiar decisões operacionais com base em dados de localização e horários.
+
+'''
+
+
+O tema do Projeto Integrador é "Desenvolver análise de dados em escala utilizando algum conjunto de dados existentes ou capturados por IoT e aprendizagem de máquina. Preparar uma interface para visualização dos resultados."
+
+
+
+
+O dashboard atual já atende parcialmente ao escopo do Projeto Integrador: ele captura e visualiza dados de ônibus em tempo real, aplica filtros, gera gráficos e mostra mapas interativos. Então ele cumpre bem a parte de **interface de visualização de resultados** e **análise de dados**.
+
+No entanto, alguns pontos do tema do projeto ainda poderiam ser reforçados para ficar **totalmente alinhado**:
+
+1. **Escala e processamento de dados**
+
+   * Atualmente você faz amostragem se o dataset for grande, mas não há nenhum processamento em larga escala ou técnicas de otimização para lidar com milhões de registros. Se quiser destacar esse ponto, poderia mostrar algum processamento mais robusto, agregações ou índices para acelerar consultas.
+
+2. **IoT / dados em tempo real**
+
+   * Você já tem dados de “tempo real”, mas se quiser reforçar o uso de IoT, poderia mencionar a origem dos dados (API de ônibus, GPS em tempo real) e como o dashboard se atualiza.
+
+3. **Aprendizado de máquina**
+
+   * O projeto **não tem ML atualmente**. Dependendo do que a banca espera, você poderia adicionar algo simples, como:
+
+     * Predição de horários futuros de chegada de ônibus.
+     * Agrupamento de linhas ou trajetos usando clustering.
+     * Detecção de outliers na localização ou horários.
+
+4. **Documentação e insights**
+
+   * Vale reforçar **o que o usuário consegue extrair**: quais linhas estão mais congestionadas, horários de maior movimento, trajetos mais ativos, etc.
+
+Resumindo:
+
+* Para cumprir **o mínimo**, o dashboard atual já atende ao requisito de visualização e análise.
+* Para **superar as expectativas**, você poderia acrescentar: análise de ML simples, tratamento de dados em escala maior, ou insights preditivos.
+
+Aprendizado de maquina
+
+prever a quantidade de ônibus ativos por hora ou a ocupação média de cada linha.
+
+
+
+
+✅ **Funcionalidades finais do dashboard**:
+
+* Filtros interativos por linhas.
+* Cards com resumo: total de ônibus ativos, linhas selecionadas e última coleta.
+* Mapa interativo com:
+
+  * Pontos representando ônibus.
+  * Tooltips com linha, prefixo e hora da coleta.
+  * Trajetos previstos conectando pontos consecutivos do mesmo ônibus.
+  * Legenda expansível para cores das linhas.
+* Gráfico de distribuição de ônibus ao longo do dia.
+* Visual limpo e consistente com cores escuras e destaque azul.
+
+
+
+
+

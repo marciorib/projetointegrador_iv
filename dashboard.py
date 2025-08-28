@@ -38,12 +38,19 @@ st.markdown(
 @st.cache_data
 def load_data(caminho_csv, n_amostra=10000):
     df = pd.read_csv(caminho_csv)
+
+    # Garantir colunas mínimas
     for col in ["hora_coleta", "codigo_linha", "prefixo", "latitude", "longitude"]:
         if col not in df.columns:
             df[col] = pd.NA
+
+    # Converter hora_coleta em datetime
     df["hora_coleta"] = pd.to_datetime(df["hora_coleta"], errors="coerce")
+
+    # Amostragem se dataset grande
     if len(df) > n_amostra:
         df = df.sample(n=n_amostra, random_state=42)
+
     return df
 
 df = load_data("onibus_todos.csv")
@@ -71,36 +78,35 @@ def formatar_data_segura(data):
     return str(data)
 
 # -------------------------------
-# Layout
+# Função para converter hex em RGBA
+# -------------------------------
+def hex_to_rgba(hex_color, alpha=180):
+    hex_color = hex_color.lstrip("#")
+    return [int(hex_color[0:2],16), int(hex_color[2:4],16), int(hex_color[4:6],16), alpha]
+
+# -------------------------------
+# Layout - Título e Cards
 # -------------------------------
 st.title("📊 Dashboard SPTrans - Ônibus em Tempo Real")
-
-# Cards
 col1, col2, col3 = st.columns(3)
 col1.metric("🚌 Total de ônibus ativos", len(df_filtrado["prefixo"].dropna().unique()))
 col2.metric("📋 Linhas selecionadas", len(linhas))
 col3.metric("⏱️ Última coleta", formatar_data_segura(df_filtrado["hora_coleta"].max()))
 
 # -------------------------------
-# Mapa
+# Mapa com tooltip e trajetos previstos
 # -------------------------------
-st.subheader("🗺️ Localização dos Ônibus")
+st.subheader("🗺️ Localização e Trajetos dos Ônibus")
 if not df_filtrado.empty and df_filtrado[["latitude", "longitude"]].notna().all(axis=None):
-    # Criar cores diferentes para cada linha
+    # Cores por linha
     linhas_unicas = df_filtrado["codigo_linha"].dropna().unique()
     cores = random.choices(list(mcolors.CSS4_COLORS.values()), k=len(linhas_unicas))
     cor_map = dict(zip(linhas_unicas, cores))
     df_filtrado["cor"] = df_filtrado["codigo_linha"].map(cor_map).fillna("#21c4ff")
+    df_filtrado["rgba"] = df_filtrado["cor"].apply(lambda x: hex_to_rgba(x))
 
-    # Converter cores hex para listas RGBA
-    def hex_to_rgba(hex_color, alpha=180):
-        hex_color = hex_color.lstrip("#")
-        return [int(hex_color[0:2],16), int(hex_color[2:4],16), int(hex_color[4:6],16), alpha]
-
-    df_filtrado["rgba"] = df_filtrado["cor"].apply(hex_to_rgba)
-
-    # Plotar mapa com PyDeck
-    layer = pdk.Layer(
+    # Camada ScatterplotLayer (ônibus)
+    scatter_layer = pdk.Layer(
         "ScatterplotLayer",
         data=df_filtrado,
         get_position=["longitude", "latitude"],
@@ -109,35 +115,59 @@ if not df_filtrado.empty and df_filtrado[["latitude", "longitude"]].notna().all(
         pickable=True
     )
 
-    view_state = pdk.ViewState(
-        latitude=df_filtrado["latitude"].mean(),
-        longitude=df_filtrado["longitude"].mean(),
-        zoom=11,
-        pitch=0
-    )
+    # Criar trajetos previstos: conectar pontos consecutivos do mesmo prefixo
+    trajetos = []
+    for prefixo, df_bus in df_filtrado.groupby("prefixo"):
+        df_sorted = df_bus.sort_values("hora_coleta")
+        coords = df_sorted[["longitude", "latitude"]].values
+        for i in range(len(coords)-1):
+            trajetos.append({
+                "from_lon": coords[i][0], "from_lat": coords[i][1],
+                "to_lon": coords[i+1][0], "to_lat": coords[i+1][1],
+                "cor": cor_map.get(df_sorted["codigo_linha"].iloc[i], "#21c4ff")
+            })
+    df_trajetos = pd.DataFrame(trajetos)
+    if not df_trajetos.empty:
+        trajetos_layer = pdk.Layer(
+            "LineLayer",
+            data=df_trajetos,
+            get_source_position=["from_lon", "from_lat"],
+            get_target_position=["to_lon", "to_lat"],
+            get_color=[180, 180, 180],
+            get_width=3
+        )
+        layers = [scatter_layer, trajetos_layer]
+    else:
+        layers = [scatter_layer]
 
-    r = pdk.Deck(
-        layers=[layer],
-        initial_view_state=view_state,
-        map_style="mapbox://styles/mapbox/dark-v10"
-    )
+    # Tooltip interativo
+    tooltip = {
+        "html": "<b>Linha:</b> {codigo_linha} <br/> <b>Prefixo:</b> {prefixo} <br/> <b>Hora:</b> {hora_coleta}",
+        "style": {"color": "white"}
+    }
 
-    st.pydeck_chart(r)
+    # Deck com camadas e tooltip
+    st.pydeck_chart(pdk.Deck(
+        map_style="mapbox://styles/mapbox/dark-v10",
+        initial_view_state=pdk.ViewState(
+            latitude=df_filtrado["latitude"].mean(),
+            longitude=df_filtrado["longitude"].mean(),
+            zoom=11,
+            pitch=0,
+        ),
+        layers=layers,
+        tooltip=tooltip
+    ))
 
-    # -------------------------------
-    # Legenda das linhas (expander)
-    # -------------------------------
-    with st.expander("Mostrar legenda das linhas"):
-        legenda_html = ""
-        for linha, cor in cor_map.items():
-            legenda_html += f'<div style="display:inline-block; margin-right:15px;">'
-            legenda_html += f'<div style="width:20px; height:20px; background-color:{cor}; display:inline-block; margin-right:5px; border-radius:4px;"></div>'
-            legenda_html += f'<span>{linha}</span></div>'
-        st.markdown(legenda_html, unsafe_allow_html=True)
-
+    # Legenda escondida
+    with st.expander("📖 Mostrar Legenda das Linhas"):
+        legenda_df = pd.DataFrame({"Linha": linhas_unicas, "Cor": [cor_map[l] for l in linhas_unicas]})
+        legenda_df["Cor"] = legenda_df["Cor"].apply(
+            lambda x: f'<div style="width:20px;height:20px;background-color:{x};display:inline-block;margin-right:5px;"></div>{x}'
+        )
+        st.markdown(legenda_df.to_html(escape=False, index=False), unsafe_allow_html=True)
 else:
     st.warning("Nenhum ônibus ativo ou dados de localização ausentes para os filtros selecionados.")
-
 
 # -------------------------------
 # Gráfico de horário
@@ -159,5 +189,4 @@ if not df_filtrado.empty and pd.api.types.is_datetime64_any_dtype(df_filtrado["h
         st.info("Sem dados suficientes para gerar o gráfico de horários.")
 else:
     st.info("Coluna 'hora_coleta' ausente ou com formato inválido.")
-
 
