@@ -2,72 +2,162 @@ import streamlit as st
 import pandas as pd
 import pydeck as pdk
 import plotly.express as px
+from st_aggrid import AgGrid, GridOptionsBuilder
+import warnings
+from datetime import datetime
+import matplotlib.colors as mcolors
+import random
 
+# -------------------------------
 # Configuração da página
+# -------------------------------
 st.set_page_config(page_title="Dashboard SPTrans", layout="wide")
+warnings.filterwarnings("ignore")
 
-# Título
-st.title("📊 Dashboard SPTrans - Ônibus em Tempo Real")
-
-# Carregar dados
-@st.cache_data
-def load_data():
-    df = pd.read_csv("onibus_todos.csv")
-    df["hora_coleta"] = pd.to_datetime(df["hora_coleta"])
-    return df
-
-df = load_data()
-
-# Sidebar - Filtros
-st.sidebar.header("Filtros")
-linhas = st.sidebar.multiselect(
-    "Escolha a(s) linha(s):",
-    options=df["codigo_linha"].unique(),
-    default=df["codigo_linha"].unique()
+# -------------------------------
+# CSS customizado
+# -------------------------------
+st.markdown(
+    """
+    <style>
+    .stApp { background-color: #0e1117; color: #ffffff; font-family: "Segoe UI", sans-serif; }
+    h1, h2, h3 { color: #61dafb; font-weight: 600; }
+    [data-testid="stMetricValue"] { font-size: 28px; color: #21c4ff; }
+    [data-testid="stMetricDelta"] { color: #f0f0f0 !important; }
+    section[data-testid="stSidebar"] { background-color: #161a23; }
+    .ag-theme-balham { border-radius: 12px; overflow: hidden; }
+    button[kind="primary"] { background-color: #21c4ff !important; color: black !important; border-radius: 8px !important; }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
-df_filtrado = df[df["codigo_linha"].isin(linhas)]
+# -------------------------------
+# Função para carregar dados
+# -------------------------------
+@st.cache_data
+def load_data(caminho_csv, n_amostra=10000):
+    df = pd.read_csv(caminho_csv)
+    for col in ["hora_coleta", "codigo_linha", "prefixo", "latitude", "longitude"]:
+        if col not in df.columns:
+            df[col] = pd.NA
+    df["hora_coleta"] = pd.to_datetime(df["hora_coleta"], errors="coerce")
+    if len(df) > n_amostra:
+        df = df.sample(n=n_amostra, random_state=42)
+    return df
 
-# Visualização rápida dos dados
-st.subheader("📋 Prévia dos Dados")
-st.dataframe(df_filtrado)
+df = load_data("onibus_todos.csv")
 
-# Mapa das posições dos ônibus
-st.subheader("🚌 Localização dos Ônibus")
-if not df_filtrado.empty:
-    st.pydeck_chart(pdk.Deck(
-        map_style="mapbox://styles/mapbox/streets-v11",
-        initial_view_state=pdk.ViewState(
-            latitude=df_filtrado["latitude"].mean(),
-            longitude=df_filtrado["longitude"].mean(),
-            zoom=11,
-            pitch=0,
-        ),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=df_filtrado,
-                get_position='[longitude, latitude]',
-                get_color='[200, 30, 0, 160]',
-                get_radius=50,
-                pickable=True
-            )
-        ]
-    ))
+# -------------------------------
+# Sidebar - Filtros
+# -------------------------------
+st.sidebar.header("🛠️ Filtros")
+linhas = st.sidebar.multiselect(
+    "Escolha a(s) linha(s):",
+    options=df["codigo_linha"].dropna().unique(),
+    default=df["codigo_linha"].dropna().unique()
+)
+
+df_filtrado = df[df["codigo_linha"].isin(linhas)] if linhas else df.copy()
+
+# -------------------------------
+# Função segura para exibir datas
+# -------------------------------
+def formatar_data_segura(data):
+    if pd.isna(data):
+        return "N/A"
+    if isinstance(data, (pd.Timestamp, datetime)):
+        return data.strftime("%d/%m/%Y %H:%M:%S")
+    return str(data)
+
+# -------------------------------
+# Layout
+# -------------------------------
+st.title("📊 Dashboard SPTrans - Ônibus em Tempo Real")
+
+# Cards
+col1, col2, col3 = st.columns(3)
+col1.metric("🚌 Total de ônibus ativos", len(df_filtrado["prefixo"].dropna().unique()))
+col2.metric("📋 Linhas selecionadas", len(linhas))
+col3.metric("⏱️ Última coleta", formatar_data_segura(df_filtrado["hora_coleta"].max()))
+
+# -------------------------------
+# Mapa
+# -------------------------------
+st.subheader("🗺️ Localização dos Ônibus")
+if not df_filtrado.empty and df_filtrado[["latitude", "longitude"]].notna().all(axis=None):
+    # Criar cores diferentes para cada linha
+    linhas_unicas = df_filtrado["codigo_linha"].dropna().unique()
+    cores = random.choices(list(mcolors.CSS4_COLORS.values()), k=len(linhas_unicas))
+    cor_map = dict(zip(linhas_unicas, cores))
+    df_filtrado["cor"] = df_filtrado["codigo_linha"].map(cor_map).fillna("#21c4ff")
+
+    # Converter cores hex para listas RGBA
+    def hex_to_rgba(hex_color, alpha=180):
+        hex_color = hex_color.lstrip("#")
+        return [int(hex_color[0:2],16), int(hex_color[2:4],16), int(hex_color[4:6],16), alpha]
+
+    df_filtrado["rgba"] = df_filtrado["cor"].apply(hex_to_rgba)
+
+    # Plotar mapa com PyDeck
+    layer = pdk.Layer(
+        "ScatterplotLayer",
+        data=df_filtrado,
+        get_position=["longitude", "latitude"],
+        get_color="rgba",
+        get_radius=70,
+        pickable=True
+    )
+
+    view_state = pdk.ViewState(
+        latitude=df_filtrado["latitude"].mean(),
+        longitude=df_filtrado["longitude"].mean(),
+        zoom=11,
+        pitch=0
+    )
+
+    r = pdk.Deck(
+        layers=[layer],
+        initial_view_state=view_state,
+        map_style="mapbox://styles/mapbox/dark-v10"
+    )
+
+    st.pydeck_chart(r)
+
+    # -------------------------------
+    # Legenda das linhas (expander)
+    # -------------------------------
+    with st.expander("Mostrar legenda das linhas"):
+        legenda_html = ""
+        for linha, cor in cor_map.items():
+            legenda_html += f'<div style="display:inline-block; margin-right:15px;">'
+            legenda_html += f'<div style="width:20px; height:20px; background-color:{cor}; display:inline-block; margin-right:5px; border-radius:4px;"></div>'
+            legenda_html += f'<span>{linha}</span></div>'
+        st.markdown(legenda_html, unsafe_allow_html=True)
+
 else:
-    st.info("Nenhum ônibus ativo na linha selecionada.")
+    st.warning("Nenhum ônibus ativo ou dados de localização ausentes para os filtros selecionados.")
 
-# Estatísticas
-st.subheader("📊 Estatísticas")
-st.metric("Total de ônibus ativos", len(df_filtrado["prefixo"].unique()))
-st.metric("Linhas selecionadas", len(linhas))
-st.metric("Última coleta", df_filtrado["hora_coleta"].max() if not df_filtrado.empty else "N/A")
 
-# Gráfico de ônibus por horário
-st.subheader("⏱️ Ônibus por Horário")
-if not df_filtrado.empty:
-    df_hora = df_filtrado.groupby(df_filtrado["hora_coleta"].dt.hour).size().reset_index(name='quantidade')
-    fig = px.bar(df_hora, x='hora_coleta', y='quantidade', labels={'hora_coleta':'Hora do dia', 'quantidade':'Qtde de ônibus'})
-    st.plotly_chart(fig, use_container_width=True)
+# -------------------------------
+# Gráfico de horário
+# -------------------------------
+st.subheader("📈 Ônibus por Horário")
+if not df_filtrado.empty and pd.api.types.is_datetime64_any_dtype(df_filtrado["hora_coleta"]):
+    df_valid = df_filtrado.dropna(subset=["hora_coleta"])
+    if not df_valid.empty:
+        df_hora = df_valid.groupby(df_valid["hora_coleta"].dt.hour).size().reset_index(name="quantidade")
+        fig = px.bar(
+            df_hora, x="hora_coleta", y="quantidade",
+            labels={"hora_coleta": "Hora do dia", "quantidade": "Qtde de ônibus"},
+            title="Distribuição de ônibus ao longo do dia",
+            color_discrete_sequence=["#21c4ff"]
+        )
+        fig.update_layout(plot_bgcolor="#0e1117", paper_bgcolor="#0e1117", font=dict(color="white"))
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.info("Sem dados suficientes para gerar o gráfico de horários.")
 else:
-    st.info("Nenhum dado disponível para o gráfico de horários.")
+    st.info("Coluna 'hora_coleta' ausente ou com formato inválido.")
+
+

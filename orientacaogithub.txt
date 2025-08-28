@@ -1,0 +1,28 @@
+#copiar e colar no PowerShell, passo a passo, que limpa o histórico do CSV grande, ignora o arquivo e força o push para o GitHub:
+
+
+# 1️⃣ Fazer backup do CSV local
+copy onibus_todos.csv ..\backup_onibus_todos.csv
+
+# 2️⃣ Remover o CSV do histórico antigo
+git lfs uninstall
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch onibus_todos.csv" --prune-empty --tag-name-filter cat -- --all
+
+# 3️⃣ Limpar referências antigas do Git
+rm -r .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+
+# 4️⃣ Garantir que o CSV será ignorado no futuro
+echo "onibus_todos.csv" >> .gitignore
+git add .gitignore
+git commit -m "Ignorar CSV grande"
+
+# 5️⃣ Reinstalar Git LFS (opcional, se quiser usar CSV grande futuramente)
+git lfs install
+git lfs track "*.csv"
+git add .gitattributes
+git commit -m "Preparar Git LFS para arquivos CSV grandes"
+
+# 6️⃣ Enviar os commits limpos para o GitHub
+git push origin main --force
