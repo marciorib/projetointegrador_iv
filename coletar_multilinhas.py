@@ -1,7 +1,7 @@
 
 '''Diferenças principais
 
-Agora você pode definir várias linhas na lista LINHAS = ["8000", "7013", "4112"].
+você pode definir várias linhas na lista LINHAS = ["8000", "7013", "4112"].
 
 Todos os registros vão para um único CSV chamado onibus_multilinhas.csv.
 
@@ -209,9 +209,9 @@ import time
 import os
 
 # === CONFIGURAÇÕES ===
-TOKEN = "1cf54ff69bbdf159a0ce16af8a6cdc3d4428075aa741862514aab4ea0c92c4df"  # substitua pelo seu token
+TOKEN = "1cf54ff69bbdf159a0ce16af8a6cdc3d4428075aa741862514aab4ea0c92c4df"  # Coloque aqui o token fornecido pela sptrans
 INTERVALO = 60            # tempo em segundos entre coletas
-ARQUIVO_CSV = "onibus_todos.csv"
+ARQUIVO_CSV = "onibus_todos.csv"  # onibus pra caceta, analisar intervalo
 
 # === AUTENTICAÇÃO ===
 session = requests.Session()
