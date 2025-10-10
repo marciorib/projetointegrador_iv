@@ -37,12 +37,12 @@ Este projeto apresenta um **dashboard interativo** desenvolvido em **Python + St
 
 ## 📂 Estrutura do projeto
 
-projetointegrador_iv/
-│── dashboard.py # Código principal do dashboard
-│── onibus_todos.csv # Base de dados com posições dos ônibus
-│── README.md # Este arquivo
+- **projetointegrador_iv/**:
+│── dashboardapp.py # Código principal do dashboard
 
----
+│── onibus_todos.csv # Base de dados com posições dos ônibus
+
+│── README.md # Este arquivo
 
 ---
 
@@ -62,7 +62,7 @@ source venv/bin/activate # Linux/Mac
 pip install -r requirements.txt
 
 4. Execute o dashboardapp:
-streamlit run dashboard.py
+streamlit run dashboardapp.py
 
 5. Acesse no navegador
 http://localhost:8501

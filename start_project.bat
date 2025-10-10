@@ -1,6 +1,6 @@
 
 
-echo script automatizador para rodar a coleta em segundo plano enquanto você abre o dashboard. Assim você terá sempre dados fresquinhos no onibus_todos.csv enquanto visualiza no navegador.
+echo script automatizador para rodar a coleta em segundo plano enquanto vc abre o dashboardapp. Assim você terá sempre dados fresquinhos no onibus_todos.csv enquanto visualiza no navegador.
 
 echo Dê um duplo clique nele → ele vai abrir dois terminais:
 echo Um rodando o coletor (alimentando o CSV).
@@ -25,3 +25,5 @@ timeout /t 5 > nul
 
 :: Inicia o dashboard
 streamlit run dashboard.py
+
+
