@@ -58,6 +58,7 @@ A aplicação foi construída em **Python + Streamlit**, permitindo explorar de 
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
 
+---
 ##Criar ambiente Visual
 
 python -m venv venv
@@ -68,11 +69,19 @@ venv\Scripts\activate
 pip install -r requirements.txt
 
 ##Executar o sistema
+---
 
 streamlit run Home.py
 ➡️ Acesse no navegador: http://localhost:8501
 
-## 🗂️ Estrutura do Projeto
+
+
+</div> ```
+
+
+
+---
+## 🗂️ **Estrutura do Projeto**
 
 projetointegrador_iv/
 │
@@ -89,7 +98,9 @@ projetointegrador_iv/
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
 
-## 🤖 Modelo de Machine Learning
+---
+
+##🤖 **Modelo de Machine Learning**
 
 O projeto implementa um modelo de Regressão Linear com o pacote scikit-learn para prever o número de ônibus ativos por hora.
 
@@ -114,7 +125,10 @@ Previsões coerentes com horários de maior e menor fluxo.
 Visualização temporal com animação e gráficos interativos.
 
 <div align="center">
-📸 Capturas de Tela (adicione suas imagens na pasta /img)
+
+---
+
+📸 **Capturas de Tela (adicione suas imagens na pasta /img)**
 Tela	Descrição
 
 	Página inicial do sistema
@@ -124,13 +138,17 @@ Tela	Descrição
 	Gráfico de previsão de atividade dos ônibus
 </div>
 
-## 👨‍💻 Equipe de Desenvolvimento
+---
+
+##👨‍💻 **Equipe de Desenvolvimento**
 
 👥 Grupo 07 – Turma 01 – Polo Bauru
 👨‍🏫 Orientador: Prof. Vinício Marcelo Pereira
 🏫 Universidade Virtual do Estado de São Paulo – UNIVESP
 
-## 📚 Referências
+---
+
+##📚 **Referências**
 
 SPTRANS – Dados Abertos
 
@@ -150,5 +168,3 @@ Todos os direitos reservados aos autores.
 
 ✨ Desenvolvido com 💙 por alunos da UNIVESP
 📍 Engenharia de Computação & Ciência de Dados – Turma 01 (2025)
-
-</div> ```
