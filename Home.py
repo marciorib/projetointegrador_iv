@@ -17,7 +17,7 @@ st.set_page_config(
 BASE_DIR = Path(__file__).resolve().parent
 IMG_DIR = BASE_DIR / "img"
 
-LOGO_PATH = IMG_DIR / "Univesp_logo_jpg_cmyk-487x287.jpg"
+LOGO_PATH = IMG_DIR / "Univesp_logo_png_rgb.png"
 SCREEN_MAP = IMG_DIR / "screenshot_mapa.png"
 SCREEN_CHART = IMG_DIR / "screenshot_grafico.png"
 
@@ -167,8 +167,14 @@ st.markdown("""
 **Orientador:** Prof. Vinícius Marcelo Pereira  
 
 **Integrantes:**  
-- [Seu Nome Aqui]  
-- [Demais Integrantes do Grupo]  
+- ALEX DE ALMEIDA CRUZ, 2208970
+- BÁRBARA HAYDEE PRESENTE, 2214684
+- CARLOS ALBERTO MORAL JUNIOR, 2203786
+- ELIANA APARECIDA RIBEIRO BUDIN, 2208956
+- MARCIO ANTONIO RIBEIRO, 226928
+- ROGERIO LEONEL DOS SANTOS, 2220619
+- SERGIO LUIZ AUGUSTO DIAS, 2203760
+  
 """)
 st.markdown('</div>', unsafe_allow_html=True)
 

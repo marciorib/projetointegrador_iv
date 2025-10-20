@@ -1,78 +1,59 @@
-# projetointegrador_iv
-# 📊 Dashboard SPTrans - Projeto Integrador IV
+# 🚌 Dashboard SPTrans - Projeto Integrador IV (UNIVESP)
 
-Este projeto apresenta um **dashboard interativo** desenvolvido em **Python + Streamlit** para visualização em tempo real dos ônibus de São Paulo (SPTrans).
-
-## 🚀 Funcionalidades
-
-- **Filtros interativos** na barra lateral:
-  - Seleção de **linhas**.
-  - Seleção de **ônibus individuais (prefixos)**.
-  - Checkbox para **mostrar ou ocultar trajetos**.
-  - **Slider temporal** para escolher a hora do dia e ver apenas os ônibus daquele período.
-- **Mapa interativo** com PyDeck:
-  - Pontos dos ônibus em cores diferentes por linha.
-  - Destaque em **amarelo** para prefixos selecionados.
-  - Trajetos em **azul** quando ativado na sidebar.
-- **Estatísticas principais**:
-  - Total de ônibus ativos.
-  - Quantidade de linhas selecionadas.
-  - Última coleta registrada.
-- **Gráfico por horário** (Plotly):
-  - Distribuição dos ônibus ao longo do dia.
-- **Tabela interativa** com AgGrid (em breve será adicionada).
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.38-red.svg)](https://streamlit.io/)
+[![Pandas](https://img.shields.io/badge/Pandas-2.2.2-yellow.svg)](https://pandas.pydata.org/)
+[![Plotly](https://img.shields.io/badge/Plotly-5.22.0-lightblue.svg)](https://plotly.com/)
+[![scikit-learn](https://img.shields.io/badge/Scikit--Learn-1.5.1-orange.svg)](https://scikit-learn.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## 🧭 Sobre o Projeto
 
-- [Python 3.11+](https://www.python.org/)
-- [Streamlit](https://streamlit.io/)
-- [Pandas](https://pandas.pydata.org/)
-- [PyDeck](https://deckgl.readthedocs.io/)
-- [Plotly Express](https://plotly.com/python/plotly-express/)
-- [st-aggrid](https://pypi.org/project/streamlit-aggrid/)
+O **Dashboard SPTrans** é uma aplicação interativa desenvolvida como parte do **Projeto Integrador IV da UNIVESP**.  
+Seu objetivo é **monitorar, visualizar e analisar dados em tempo real** sobre a frota de ônibus da cidade de São Paulo,  
+utilizando dados públicos disponibilizados pela SPTrans.
 
----
-
-## 📂 Estrutura do projeto
-
-- **projetointegrador_iv/**:
-│── dashboardapp.py # Código principal do dashboard
-
-│── onibus_todos.csv # Base de dados com posições dos ônibus
-
-│── README.md # Este arquivo
+A solução permite **análises de mobilidade urbana**, **identificação de horários de pico** e  
+**apoio ao planejamento operacional** por meio de visualizações interativas e aprendizado de máquina.
 
 ---
 
-## ▶️ Como executar
+## 🎯 Objetivos
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/marciorib/projetointegrador_iv.git
-   cd projetointegrador_iv
-
-2. Crie um ambiente virtual
-python -m venv venv
-venv\Scripts\activate   # Windows
-source venv/bin/activate # Linux/Mac
-
-3. Instale as dependencias
-pip install -r requirements.txt
-
-4. Execute o dashboardapp:
-streamlit run dashboardapp.py
-
-5. Acesse no navegador
-http://localhost:8501
+- Consolidar dados de localização da frota em tempo real;  
+- Exibir visualizações geográficas e temporais interativas;  
+- Permitir análise de linhas e trajetos de ônibus;  
+- Aplicar técnicas de **Machine Learning** para prever padrões operacionais;  
+- Oferecer uma ferramenta de apoio à tomada de decisão na gestão da mobilidade urbana.
 
 ---
 
-📌 Próximos passos  12/09/2025
+## 🧰 Tecnologias Utilizadas
 
-Implementar animação temporal (play/pause) para simular movimentação dos ônibus ao longo do dia.
+| Categoria | Ferramentas |
+|------------|-------------|
+| Linguagem | ![Python](https://img.shields.io/badge/-Python-0e1117?logo=python) |
+| Framework Web | ![Streamlit](https://img.shields.io/badge/-Streamlit-ff4b4b?logo=streamlit) |
+| Manipulação de Dados | ![Pandas](https://img.shields.io/badge/-Pandas-150458?logo=pandas) |
+| Visualização | ![Plotly](https://img.shields.io/badge/-Plotly-3f4f75?logo=plotly) e ![PyDeck](https://img.shields.io/badge/-PyDeck-00aaff?logo=deck.gl) |
+| Machine Learning | ![Scikit-learn](https://img.shields.io/badge/-Scikit--Learn-f7931e?logo=scikitlearn) |
+| Controle de Versão | ![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github) |
 
-Melhorar a tabela interativa com AgGrid (filtros e ordenação).
+---
 
-Publicar o dashboard online via Streamlit Cloud ou Railway.
+## 📂 Estrutura do Projeto
+
+
+---
+
+## 🔧 Melhorias Futuras
+
+- Implementar **animação temporal (play/pause)** para simular a movimentação dos ônibus ao longo do dia;  
+- Integrar dados em tempo real diretamente da API da SPTrans;  
+- Adicionar filtros geográficos por zona ou bairro;  
+- Incorporar métricas de eficiência energética e emissões;  
+- Publicar o dashboard completo em ambiente web (Streamlit Cloud ou Render).
+
+---

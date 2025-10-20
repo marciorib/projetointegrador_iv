@@ -1,157 +1,98 @@
 
 import streamlit as st
 import pandas as pd
-import numpy as np
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, r2_score
 import plotly.express as px
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, r2_score
+import numpy as np
 from datetime import datetime
 
-# -----------------------------
+# --------------------------------
 # Configuração da página
-# -----------------------------
-st.set_page_config(
-    page_title="Análise Preditiva - SPTrans",
-    page_icon="🤖",
-    layout="wide"
-)
+# --------------------------------
+st.set_page_config(page_title="Previsão SPTrans", layout="wide")
 
-# -----------------------------
-# Estilo visual (modo escuro)
-# -----------------------------
+st.title("🧠 Previsão de Atividade de Ônibus - SPTrans")
+
 st.markdown("""
-    <style>
-    .stApp {
-        background-color: #0e1117;
-        color: white;
-        font-family: "Segoe UI", sans-serif;
-    }
-    h1, h2, h3 {
-        color: #61dafb;
-        font-weight: 600;
-    }
-    .card {
-        background-color: #161a23;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 0 6px rgba(33, 196, 255, 0.08);
-        margin-bottom: 25px;
-    }
-    </style>
-""", unsafe_allow_html=True)
+Nesta seção aplicamos **aprendizado de máquina (Machine Learning)** para prever o número estimado 
+de ônibus ativos ao longo do dia, com base em dados históricos de operação.
+""")
 
-# -----------------------------
-# Cabeçalho
-# -----------------------------
-st.title("🤖 Análise Preditiva - SPTrans")
-st.markdown(f"**Última atualização:** {datetime.now().strftime('%d/%m/%Y %H:%M')}")
-
-st.markdown("---")
-
-# -----------------------------
-# Carregar os dados
-# -----------------------------
+# --------------------------------
+# Carregar e preparar dados
+# --------------------------------
 @st.cache_data
 def load_data():
-    df = pd.read_csv("onibus_todos.csv")
-    if "hora_coleta" not in df.columns:
-        st.error("O arquivo CSV precisa conter a coluna 'hora_coleta'.")
-        return pd.DataFrame()
+    df = pd.read_csv("onibus_todos.csv", usecols=["codigo_linha", "hora_coleta"])
     df["hora_coleta"] = pd.to_datetime(df["hora_coleta"], errors="coerce")
-    df.dropna(subset=["hora_coleta"], inplace=True)
+    df = df.dropna(subset=["hora_coleta"])
+    df["hora"] = df["hora_coleta"].dt.hour
+    df = df.groupby("hora").size().reset_index(name="quantidade")
     return df
 
 df = load_data()
 
-if df.empty:
-    st.warning("Nenhum dado carregado. Verifique o arquivo 'onibus_todos.csv'.")
-    st.stop()
+# --------------------------------
+# Exibição de dados
+# --------------------------------
+st.subheader("📊 Dados de Treinamento")
+st.dataframe(df)
 
-# -----------------------------
-# Pré-processamento dos dados
-# -----------------------------
-df["hora"] = df["hora_coleta"].dt.hour
-df_horas = df.groupby("hora").size().reset_index(name="quantidade")
+# --------------------------------
+# Modelo preditivo
+# --------------------------------
+X = df[["hora"]]  # variável independente
+y = df["quantidade"]  # variável alvo
 
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("🧮 Etapa 1: Análise dos Dados")
-st.markdown("""
-Os dados coletados foram agrupados por **hora do dia**, permitindo identificar padrões de volume de operação.
-Esses dados servirão como base para o modelo de previsão de **quantidade de ônibus ativos por hora**.
-""")
-st.dataframe(df_horas)
-st.markdown('</div>', unsafe_allow_html=True)
+# Dividir treino e teste
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# -----------------------------
-# Treinamento do modelo
-# -----------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("🧠 Etapa 2: Treinamento do Modelo")
-
-# Variáveis
-X = df_horas[["hora"]]
-y = df_horas["quantidade"]
-
-# Modelo de regressão linear
+# Treinar modelo
 modelo = LinearRegression()
-modelo.fit(X, y)
+modelo.fit(X_train, y_train)
 
-# Previsão
-horas_futuras = np.arange(0, 24).reshape(-1, 1)
-previsoes = modelo.predict(horas_futuras)
+# Fazer previsões
+y_pred = modelo.predict(X_test)
 
-# Métricas
-y_pred = modelo.predict(X)
-mae = mean_absolute_error(y, y_pred)
-r2 = r2_score(y, y_pred)
+# Avaliação
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 
-st.markdown(f"""
-O modelo foi treinado utilizando **Regressão Linear** da biblioteca *scikit-learn*.
-As métricas de desempenho indicam a qualidade do ajuste:
-- **Erro Médio Absoluto (MAE):** {mae:.2f}
-- **Coeficiente de Determinação (R²):** {r2:.3f}
-""")
-st.markdown('</div>', unsafe_allow_html=True)
+st.subheader("📈 Avaliação do Modelo")
+col1, col2 = st.columns(2)
+col1.metric("Erro Médio Absoluto (MAE)", f"{mae:.2f}")
+col2.metric("Coeficiente de Determinação (R²)", f"{r2:.2f}")
 
-# -----------------------------
-# Visualização dos resultados
-# -----------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("📊 Etapa 3: Resultados e Previsões")
+# --------------------------------
+# Previsão para 24h do dia
+# --------------------------------
+horas = np.arange(0, 24).reshape(-1, 1)
+previsoes = modelo.predict(horas)
+df_prev = pd.DataFrame({"Hora": horas.flatten(), "Previsão": previsoes})
 
-df_prev = pd.DataFrame({
-    "Hora do dia": horas_futuras.flatten(),
-    "Previsão (ônibus ativos)": previsoes
-})
-
-fig = px.line(df_prev,
-              x="Hora do dia", y="Previsão (ônibus ativos)",
-              title="Previsão de Operação de Ônibus por Hora",
+# Plotar resultados
+st.subheader("🔮 Previsão de Quantidade de Ônibus por Hora")
+fig = px.line(df_prev, x="Hora", y="Previsão",
+              title="Previsão de Atividade de Ônibus ao Longo do Dia",
               markers=True)
-fig.add_bar(x=df_horas["hora"], y=df_horas["quantidade"],
-            name="Dados Reais", opacity=0.6)
-fig.update_layout(
-    plot_bgcolor="#0e1117",
-    paper_bgcolor="#0e1117",
-    font=dict(color="white"),
-    legend=dict(bgcolor="rgba(0,0,0,0)", bordercolor="rgba(0,0,0,0)")
-)
+fig.update_layout(plot_bgcolor="#0e1117", paper_bgcolor="#0e1117", font=dict(color="white"))
 st.plotly_chart(fig, use_container_width=True)
-st.markdown('</div>', unsafe_allow_html=True)
 
-# -----------------------------
-# Interpretação dos resultados
-# -----------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("📈 Interpretação dos Resultados")
+# --------------------------------
+# Interpretação
+# --------------------------------
 st.markdown("""
-O gráfico acima combina os **dados reais** (em barras) e a **tendência prevista** (linha contínua) pelo modelo.
+### 🧐 Interpretação dos Resultados
 
-Essa previsão pode ser utilizada para:
-- Identificar **horários de pico** de circulação de ônibus;
-- Apoiar o **planejamento operacional da frota**;
-- Fornecer **insumos para análises de eficiência e sustentabilidade**.
+O modelo de **Regressão Linear** identifica tendências no comportamento da frota ao longo do dia,
+indicando os **horários de maior e menor atividade operacional**.
 
-Embora o modelo seja simples, ele demonstra o **potencial da aplicação de aprendizado de máquina** no contexto de mobilidade urbana.
+- 📌 **Picos de operação** normalmente aparecem nos horários de **início e fim de expediente (6h–9h e 17h–20h)**;
+- 🕓 O modelo é ajustável e pode ser ampliado para considerar **dias da semana, linhas específicas** e **condições climáticas**;
+- ⚙️ A métrica **R²** indica o quanto o modelo explica da variação dos dados — valores próximos de 1.0 representam alta precisão.
+
 """)
-st.markdown('</div>', unsafe_allow_html=True)
+
+st.success("✅ Modelo treinado e previsão gerada com sucesso!")
