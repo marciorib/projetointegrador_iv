@@ -57,29 +57,24 @@ A aplicação foi construída em **Python + Streamlit**, permitindo explorar de 
 ```bash
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
-
-
-#Criar ambiente Visual
-
+2️⃣ Criar o ambiente virtual (opcional)
+bash
+Copiar código
 python -m venv venv
 venv\Scripts\activate
-
-#Instalar dependências
-
+3️⃣ Instalar as dependências
+bash
+Copiar código
 pip install -r requirements.txt
-
-#Executar o sistema
-
-
-#streamlit run Home.py
+4️⃣ Executar o sistema
+bash
+Copiar código
+streamlit run Home.py
 ➡️ Acesse no navegador: http://localhost:8501
 
-
-
-
-
-### 🗂️ **Estrutura do Projeto**
-
+🗂️ Estrutura do Projeto
+bash
+Copiar código
 projetointegrador_iv/
 │
 ├── Home.py                         # Página inicial
@@ -94,11 +89,7 @@ projetointegrador_iv/
 │   └── Univesp_logo_jpg_cmyk-487x287.jpg
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
-
----
-
-##🤖 **Modelo de Machine Learning**
-
+🤖 Modelo de Machine Learning
 O projeto implementa um modelo de Regressão Linear com o pacote scikit-learn para prever o número de ônibus ativos por hora.
 
 Etapas:
@@ -111,42 +102,29 @@ Avaliação por métricas (MAE e R²);
 
 Exibição dos resultados em gráficos interativos.
 
-📈 O modelo demonstrou bom desempenho, capturando os horários de pico e reduzida atividade da frota.
+📈 O modelo demonstrou bom desempenho, capturando os horários de pico e de menor atividade da frota.
 
-## 📊 Resultados
+📊 Resultados
+Dashboard funcional e responsivo;
 
-Dashboard funcional e responsivo.
-
-Previsões coerentes com horários de maior e menor fluxo.
+Previsões coerentes com horários de maior e menor fluxo;
 
 Visualização temporal com animação e gráficos interativos.
 
 <div align="center">
-
----
-
-📸 **Capturas de Tela (adicione suas imagens na pasta /img)**
+📸 Capturas de Tela (adicione suas imagens na pasta /img)
 Tela	Descrição
+Página inicial do sistema
+Mapa interativo com animação temporal
+Gráfico de previsão de atividade dos ônibus
 
-	Página inicial do sistema
-
-	Mapa interativo com animação temporal
-
-	Gráfico de previsão de atividade dos ônibus
 </div>
-
----
-
-##👨‍💻 **Equipe de Desenvolvimento**
-
+👨‍💻 Equipe de Desenvolvimento
 👥 Grupo 07 – Turma 01 – Polo Bauru
 👨‍🏫 Orientador: Prof. Vinício Marcelo Pereira
 🏫 Universidade Virtual do Estado de São Paulo – UNIVESP
 
----
-
-##📚 **Referências**
-
+📚 Referências
 SPTRANS – Dados Abertos
 
 Streamlit – Build data apps in Python
@@ -155,8 +133,7 @@ Scikit-learn – Machine Learning in Python
 
 Pandas – Data Analysis Library
 
-## 🪪 Licença
-
+🪪 Licença
 Este projeto é de uso acadêmico e foi desenvolvido exclusivamente para fins educacionais no contexto do
 Projeto Integrador IV – UNIVESP (2025).
 Todos os direitos reservados aos autores.
@@ -164,4 +141,5 @@ Todos os direitos reservados aos autores.
 <div align="center">
 ✨ Desenvolvido com 💙 por alunos da UNIVESP
 📍 Engenharia de Computação & Ciência de Dados – Turma 01 (2025)
-</div>
+
+</div> ```
