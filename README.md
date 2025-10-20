@@ -58,30 +58,27 @@ A aplicação foi construída em **Python + Streamlit**, permitindo explorar de 
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
 
----
-##Criar ambiente Visual
+
+#Criar ambiente Visual
 
 python -m venv venv
 venv\Scripts\activate
 
-##Instalar dependências
+#Instalar dependências
 
 pip install -r requirements.txt
 
-##Executar o sistema
----
+#Executar o sistema
 
-streamlit run Home.py
+
+#streamlit run Home.py
 ➡️ Acesse no navegador: http://localhost:8501
 
 
 
 
 
-
-
----
-## 🗂️ **Estrutura do Projeto**
+### 🗂️ **Estrutura do Projeto**
 
 projetointegrador_iv/
 │
@@ -165,10 +162,6 @@ Projeto Integrador IV – UNIVESP (2025).
 Todos os direitos reservados aos autores.
 
 <div align="center">
-
 ✨ Desenvolvido com 💙 por alunos da UNIVESP
 📍 Engenharia de Computação & Ciência de Dados – Turma 01 (2025)
-
-
-
-</div> ```
+</div>
