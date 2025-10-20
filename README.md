@@ -76,7 +76,7 @@ streamlit run Home.py
 
 
 
-</div> ```
+
 
 
 
@@ -168,3 +168,7 @@ Todos os direitos reservados aos autores.
 
 ✨ Desenvolvido com 💙 por alunos da UNIVESP
 📍 Engenharia de Computação & Ciência de Dados – Turma 01 (2025)
+
+
+
+</div> ```
