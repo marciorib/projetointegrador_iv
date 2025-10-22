@@ -15,13 +15,11 @@
 
 ## 🧩 **Descrição do Projeto**
 
-Este projeto foi desenvolvido como parte do **Projeto Integrador IV da UNIVESP** e tem como objetivo **analisar e visualizar dados do transporte público urbano de São Paulo** usando **Ciência de Dados**, **Aprendizado de Máquina** e **Dashboards Interativos**.
+O **Dashboard SPTrans** foi desenvolvido como parte do **Projeto Integrador IV da UNIVESP**, com o objetivo de **analisar, visualizar e prever a movimentação da frota de ônibus da cidade de São Paulo**.  
 
-A aplicação foi construída em **Python + Streamlit**, permitindo explorar de forma intuitiva:
+A solução aplica conceitos de **Ciência de Dados**, **Aprendizado de Máquina** e **Visualização Interativa**, permitindo ao usuário explorar a operação do transporte público em tempo real e prever o comportamento da frota em diferentes horários do dia.
 
-✅ Localização e movimentação dos ônibus;  
-✅ Linhas em operação e seus trajetos;  
-✅ Previsão da quantidade de veículos ativos por hora (via *Machine Learning*).
+A aplicação foi construída em **Python + Streamlit**, oferecendo uma experiência visual simples e dinâmica.
 
 ---
 
@@ -29,11 +27,11 @@ A aplicação foi construída em **Python + Streamlit**, permitindo explorar de 
 
 | Função | Descrição |
 |--------|------------|
-| 🗺️ **Mapa Interativo** | Visualização em tempo real da frota, com filtros por linha e horário |
-| ⏯️ **Animação Temporal** | Simula a movimentação dos ônibus ao longo do dia (play/pause) |
-| 🤖 **Previsão de Demanda** | Modelo de regressão linear estima a quantidade de ônibus ativos |
-| 📊 **Gráficos Interativos** | Visualização de padrões de operação com Plotly |
-| 💡 **Interface Multi-Página** | Navegação entre “Home”, “Dashboard” e “Previsão” |
+| 🗺️ **Mapa Interativo** | Visualização em tempo real da frota, com filtros por linha e hora. Mostra trajetos apenas quando uma linha é selecionada. |
+| ⏯️ **Animação Temporal (em desenvolvimento)** | Recurso previsto para simular a movimentação dos ônibus ao longo do dia. |
+| 🤖 **Previsão de Demanda** | Modelo de Regressão Linear estima a quantidade de ônibus ativos por hora. |
+| 📊 **Gráficos Interativos** | Análises e comparações com o uso de gráficos dinâmicos (Plotly). |
+| 💡 **Interface Multi-Página** | Navegação entre **Home**, **Dashboard** e **Previsão**. |
 
 ---
 
@@ -77,48 +75,68 @@ bash
 Copiar código
 projetointegrador_iv/
 │
-├── Home.py                         # Página inicial
-├── dashboardapp.py                 # Versão anterior (histórico)
+├── Home.py                         # Página inicial do sistema
 ├── pages/
-│   ├── 1_Dashboard_SPTrans.py      # Mapa interativo e controle temporal
-│   ├── 2_Previsao_SPTrans.py       # Página de previsão com IA
+│   ├── 1_Dashboard_SPTrans.py      # Mapa interativo e métricas principais
+│   ├── 2_Previsao_SPTrans.py       # Módulo de Machine Learning
 │
-├── onibus_todos.csv                # Base de dados SPTrans
+├── onibus_todos.csv                # Base de dados com coletas SPTrans
 ├── requirements.txt                # Dependências do projeto
 ├── img/
-│   └── Univesp_logo_jpg_cmyk-487x287.jpg
+│   ├── Univesp_logo_png_rgb.png
+│   ├── screenshot_home.jpg
+│   ├── screenshot_mapa.png
+│   ├── screenshot_grafico.png
+│   ├── screenshot_previsao.jpg
+│
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
-🤖 Modelo de Machine Learning
-O projeto implementa um modelo de Regressão Linear com o pacote scikit-learn para prever o número de ônibus ativos por hora.
+🗺️ Módulo: Dashboard Interativo
+O Dashboard SPTrans utiliza o pacote PyDeck para renderizar um mapa dinâmico de São Paulo, com marcadores que representam a posição dos ônibus coletados.
 
-Etapas:
+Recursos principais:
 
-Leitura e preparação dos dados (hora_coleta, codigo_linha);
+Filtros de seleção por linha (menu expansível)
 
-Treinamento e validação do modelo;
+Visualização de trajetos apenas quando uma única linha é escolhida
 
-Avaliação por métricas (MAE e R²);
+Métricas de operação atualizadas automaticamente
 
-Exibição dos resultados em gráficos interativos.
+Gráfico temporal com distribuição de veículos por hora
 
-📈 O modelo demonstrou bom desempenho, capturando os horários de pico e de menor atividade da frota.
+Exemplo visual:
 
-📊 Resultados
-Dashboard funcional e responsivo;
 
-Previsões coerentes com horários de maior e menor fluxo;
+Mapa interativo mostrando a frota e trajetos das linhas selecionadas.
 
-Visualização temporal com animação e gráficos interativos.
+🤖 Módulo: Previsão com Machine Learning
+O módulo de previsão aplica Regressão Linear (Scikit-learn) para estimar a quantidade de ônibus ativos por hora.
+A base de dados é processada e o modelo é avaliado por métricas MAE e R².
 
-<div align="center">
-📸 Capturas de Tela (adicione suas imagens na pasta /img)
-Tela	Descrição
-Página inicial do sistema
-Mapa interativo com animação temporal
-Gráfico de previsão de atividade dos ônibus
+Etapas do modelo:
 
-</div>
+Preparação dos dados (hora_coleta, quantidade)
+
+Treinamento e validação
+
+Avaliação das métricas
+
+Visualização da curva preditiva e previsão interativa
+
+Exemplo:
+
+
+Previsão de atividade da frota ao longo do dia – Regressão Linear.
+
+📈 Resultados Obtidos
+Dashboard funcional e responsivo, compatível com tema escuro.
+
+Visualização em mapa e gráficos de fácil interpretação.
+
+Previsões coerentes com horários de pico e menor atividade da frota.
+
+Layout institucional com identidade visual da UNIVESP.
+
 👨‍💻 Equipe de Desenvolvimento
 👥 Grupo 07 – Turma 01 – Polo Bauru
 👨‍🏫 Orientador: Prof. Vinício Marcelo Pereira
@@ -127,11 +145,13 @@ Gráfico de previsão de atividade dos ônibus
 📚 Referências
 SPTRANS – Dados Abertos
 
-Streamlit – Build data apps in Python
+Streamlit – Build Data Apps in Python
 
 Scikit-learn – Machine Learning in Python
 
 Pandas – Data Analysis Library
+
+PyDeck – WebGL-powered maps
 
 🪪 Licença
 Este projeto é de uso acadêmico e foi desenvolvido exclusivamente para fins educacionais no contexto do
