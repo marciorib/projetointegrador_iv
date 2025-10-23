@@ -59,13 +59,13 @@ A aplicação foi construída em **Python + Streamlit**, oferecendo uma experiê
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
 2️⃣ Criar o ambiente virtual (opcional)
-'''
+
 '''bash
 Copiar código
 python -m venv venv
 venv\Scripts\activate
 3️⃣ Instalar as dependências
-'''
+
 bash
 Copiar código
 pip install -r requirements.txt
