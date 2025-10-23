@@ -54,26 +54,25 @@ A aplicação foi construída em **Python + Streamlit**, oferecendo uma experiê
 
 ### 1️⃣ Clonar o repositório
 
-
-'''bash
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
-2️⃣ Criar o ambiente virtual (opcional)
 
-'''bash
-Copiar código
+###2️⃣ Criar o ambiente virtual (opcional)
+
+bash
 python -m venv venv
 venv\Scripts\activate
-3️⃣ Instalar as dependências
+
+###3️⃣ Instalar as dependências
 
 bash
-Copiar código
 pip install -r requirements.txt
-4️⃣ Executar o sistema
+###4️⃣ Executar o sistema
+
 bash
-Copiar código
 streamlit run Home.py
-➡️ Acesse no navegador: http://localhost:8501
+
+###➡️ Acesse no navegador: http://localhost:8501
 
 
 ## 🗂️ **Estrutura do Projeto**
@@ -108,8 +107,7 @@ Visualização de trajetos apenas quando uma única linha é escolhida
 Métricas de operação atualizadas automaticamente
 Gráfico temporal com distribuição de veículos por hora
 
-Exemplo visual:
-
+### Exemplo visual:
 
 Mapa interativo mostrando a frota e trajetos das linhas selecionadas.
 
@@ -117,7 +115,7 @@ Mapa interativo mostrando a frota e trajetos das linhas selecionadas.
 O módulo de previsão aplica Regressão Linear (Scikit-learn) para estimar a quantidade de ônibus ativos por hora.
 A base de dados é processada e o modelo é avaliado por métricas MAE e R².
 
-Etapas do modelo:
+### **Etapas do modelo:**
 
 - Preparação dos dados (hora_coleta, quantidade)
 - Treinamento e validação
@@ -144,15 +142,15 @@ Layout institucional com identidade visual da UNIVESP.
 🏫 Universidade Virtual do Estado de São Paulo – UNIVESP
 
 ## 📚 **Referências**
-SPTRANS – Dados Abertos
+**SPTRANS** – Dados Abertos
 
-Streamlit – Build Data Apps in Python
+**Streamlit** – Build Data Apps in Python
 
-Scikit-learn – Machine Learning in Python
+**Scikit-learn** – Machine Learning in Python
 
-Pandas – Data Analysis Library
+**Pandas** – Data Analysis Library
 
-PyDeck – WebGL-powered maps
+**PyDeck** – WebGL-powered maps
 
 ## 🪪 **Licença**
 Este projeto é de uso acadêmico e foi desenvolvido exclusivamente para fins educacionais no contexto do
@@ -162,5 +160,4 @@ Todos os direitos reservados aos autores.
 <div align="center">
 ✨ Desenvolvido com 💙 por alunos da UNIVESP
 📍 Engenharia de Computação & Ciência de Dados – Turma 01 (2025)
-
 </div>
