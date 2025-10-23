@@ -53,7 +53,8 @@ A aplicação foi construída em **Python + Streamlit**, oferecendo uma experiê
 ## ⚙️ **Como Executar o Projeto**
 
 ### 1️⃣ Clonar o repositório
-```bash
+
+bash
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
 2️⃣ Criar o ambiente virtual (opcional)
@@ -71,7 +72,7 @@ Copiar código
 streamlit run Home.py
 ➡️ Acesse no navegador: http://localhost:8501
 
-🗂️ Estrutura do Projeto
+## 🗂️ **Estrutura do Projeto**
 bash
 Copiar código
 projetointegrador_iv/
@@ -92,7 +93,7 @@ projetointegrador_iv/
 │
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
-🗺️ Módulo: Dashboard Interativo
+## 🗺️ **Módulo: Dashboard Interativo**
 O Dashboard SPTrans utiliza o pacote PyDeck para renderizar um mapa dinâmico de São Paulo, com marcadores que representam a posição dos ônibus coletados.
 
 Recursos principais:
@@ -107,23 +108,23 @@ Exemplo visual:
 
 Mapa interativo mostrando a frota e trajetos das linhas selecionadas.
 
-🤖 Módulo: Previsão com Machine Learning
+## 🤖 **Módulo: Previsão com Machine Learning**
 O módulo de previsão aplica Regressão Linear (Scikit-learn) para estimar a quantidade de ônibus ativos por hora.
 A base de dados é processada e o modelo é avaliado por métricas MAE e R².
 
 Etapas do modelo:
 
-Preparação dos dados (hora_coleta, quantidade)
-Treinamento e validação
-Avaliação das métricas
-Visualização da curva preditiva e previsão interativa
+- Preparação dos dados (hora_coleta, quantidade)
+- Treinamento e validação
+- Avaliação das métricas
+- Visualização da curva preditiva e previsão interativa
 
 Exemplo:
 
 
 Previsão de atividade da frota ao longo do dia – Regressão Linear.
 
-📈 Resultados Obtidos
+## 📈 **Resultados Obtidos**
 Dashboard funcional e responsivo, compatível com tema escuro.
 
 Visualização em mapa e gráficos de fácil interpretação.
@@ -137,7 +138,7 @@ Layout institucional com identidade visual da UNIVESP.
 👨‍🏫 Orientador: Prof. Vinício Marcelo Pereira
 🏫 Universidade Virtual do Estado de São Paulo – UNIVESP
 
-📚 Referências
+## 📚 **Referências**
 SPTRANS – Dados Abertos
 
 Streamlit – Build Data Apps in Python
@@ -148,7 +149,7 @@ Pandas – Data Analysis Library
 
 PyDeck – WebGL-powered maps
 
-🪪 Licença
+## 🪪 **Licença**
 Este projeto é de uso acadêmico e foi desenvolvido exclusivamente para fins educacionais no contexto do
 Projeto Integrador IV – UNIVESP (2025).
 Todos os direitos reservados aos autores.
@@ -157,17 +158,4 @@ Todos os direitos reservados aos autores.
 ✨ Desenvolvido com 💙 por alunos da UNIVESP
 📍 Engenharia de Computação & Ciência de Dados – Turma 01 (2025)
 
-</div> ```
-Salve o arquivo com o nome:
-
-Copiar código
-README.md
-na pasta raiz do projeto (onde está o Home.py).
-
-Depois, abra o terminal e envie para o GitHub:
-
-bash
-Copiar código
-git add README.md
-git commit -m "Adiciona README final do projeto"
-git push
+</div>
