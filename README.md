@@ -55,15 +55,17 @@ A aplicação foi construída em **Python + Streamlit**, oferecendo uma experiê
 ### 1️⃣ Clonar o repositório
 
 
-bash
+'''bash
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
 2️⃣ Criar o ambiente virtual (opcional)
-bash
+'''
+'''bash
 Copiar código
 python -m venv venv
 venv\Scripts\activate
 3️⃣ Instalar as dependências
+'''
 bash
 Copiar código
 pip install -r requirements.txt
@@ -76,7 +78,7 @@ streamlit run Home.py
 
 ## 🗂️ **Estrutura do Projeto**
 
-'''projetointegrador_iv/
+projetointegrador_iv/
 │
 ├── Home.py                         # Página inicial do sistema
 ├── pages/
@@ -94,7 +96,6 @@ streamlit run Home.py
 │
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
-'''
 
 
 ## 🗺️ **Módulo: Dashboard Interativo**
