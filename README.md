@@ -54,6 +54,7 @@ A aplicação foi construída em **Python + Streamlit**, oferecendo uma experiê
 
 ### 1️⃣ Clonar o repositório
 
+
 bash
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
@@ -72,13 +73,10 @@ Copiar código
 streamlit run Home.py
 ➡️ Acesse no navegador: http://localhost:8501
 
----
 
 ## 🗂️ **Estrutura do Projeto**
 
-'''text
-
-projetointegrador_iv/
+'''projetointegrador_iv/
 │
 ├── Home.py                         # Página inicial do sistema
 ├── pages/
@@ -96,9 +94,8 @@ projetointegrador_iv/
 │
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
-
 '''
----
+
 
 ## 🗺️ **Módulo: Dashboard Interativo**
 O Dashboard SPTrans utiliza o pacote PyDeck para renderizar um mapa dinâmico de São Paulo, com marcadores que representam a posição dos ônibus coletados.
