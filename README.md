@@ -10,9 +10,8 @@
 👨‍🏫 **Tutor:** Vinício Marcelo Pereira  
 📅 **Ano:** 2025  
 
----
-
 </div>
+---
 
 ## 🧩 **Descrição do Projeto**
 
@@ -57,23 +56,22 @@ A aplicação foi construída em **Python + Streamlit**, oferecendo uma experiê
 git clone https://github.com/marciorib/projetointegrador_iv.git
 cd projetointegrador_iv
 
-###2️⃣ Criar o ambiente virtual (opcional)
+### 2️⃣ Criar o ambiente virtual (opcional)
 
-bash
 python -m venv venv
 venv\Scripts\activate
 
-###3️⃣ Instalar as dependências
+### 3️⃣ Instalar as dependências
 
-bash
 pip install -r requirements.txt
-###4️⃣ Executar o sistema
 
-bash
+### 4️⃣ Executar o sistema
+
 streamlit run Home.py
 
 ###➡️ Acesse no navegador: http://localhost:8501
 
+---
 
 ## 🗂️ **Estrutura do Projeto**
 
@@ -96,9 +94,10 @@ projetointegrador_iv/
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
 
+---
 
 ## 🗺️ **Módulo: Dashboard Interativo**
-O Dashboard SPTrans utiliza o pacote PyDeck para renderizar um mapa dinâmico de São Paulo, com marcadores que representam a posição dos ônibus coletados.
+O **Dashboard SPTrans** utiliza o pacote PyDeck para renderizar um mapa dinâmico de São Paulo, com marcadores que representam a posição dos ônibus coletados.
 
 Recursos principais:
 
@@ -123,8 +122,6 @@ A base de dados é processada e o modelo é avaliado por métricas MAE e R².
 - Visualização da curva preditiva e previsão interativa
 
 Exemplo:
-
-
 Previsão de atividade da frota ao longo do dia – Regressão Linear.
 
 ## 📈 **Resultados Obtidos**
@@ -156,6 +153,8 @@ Layout institucional com identidade visual da UNIVESP.
 Este projeto é de uso acadêmico e foi desenvolvido exclusivamente para fins educacionais no contexto do
 Projeto Integrador IV – UNIVESP (2025).
 Todos os direitos reservados aos autores.
+
+---
 
 <div align="center">
 ✨ Desenvolvido com 💙 por alunos da UNIVESP
