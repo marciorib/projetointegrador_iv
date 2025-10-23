@@ -1,3 +1,4 @@
+
 <div align="center">
 
 # 🚌 **Dashboard SPTrans**  
@@ -97,11 +98,8 @@ O Dashboard SPTrans utiliza o pacote PyDeck para renderizar um mapa dinâmico de
 Recursos principais:
 
 Filtros de seleção por linha (menu expansível)
-
 Visualização de trajetos apenas quando uma única linha é escolhida
-
 Métricas de operação atualizadas automaticamente
-
 Gráfico temporal com distribuição de veículos por hora
 
 Exemplo visual:
@@ -116,11 +114,8 @@ A base de dados é processada e o modelo é avaliado por métricas MAE e R².
 Etapas do modelo:
 
 Preparação dos dados (hora_coleta, quantidade)
-
 Treinamento e validação
-
 Avaliação das métricas
-
 Visualização da curva preditiva e previsão interativa
 
 Exemplo:
@@ -163,3 +158,16 @@ Todos os direitos reservados aos autores.
 📍 Engenharia de Computação & Ciência de Dados – Turma 01 (2025)
 
 </div> ```
+Salve o arquivo com o nome:
+
+Copiar código
+README.md
+na pasta raiz do projeto (onde está o Home.py).
+
+Depois, abra o terminal e envie para o GitHub:
+
+bash
+Copiar código
+git add README.md
+git commit -m "Adiciona README final do projeto"
+git push
