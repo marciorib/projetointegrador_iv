@@ -72,9 +72,12 @@ Copiar código
 streamlit run Home.py
 ➡️ Acesse no navegador: http://localhost:8501
 
+---
+
 ## 🗂️ **Estrutura do Projeto**
 
-'''
+'''text
+
 projetointegrador_iv/
 │
 ├── Home.py                         # Página inicial do sistema
@@ -93,7 +96,9 @@ projetointegrador_iv/
 │
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
+
 '''
+---
 
 ## 🗺️ **Módulo: Dashboard Interativo**
 O Dashboard SPTrans utiliza o pacote PyDeck para renderizar um mapa dinâmico de São Paulo, com marcadores que representam a posição dos ônibus coletados.
