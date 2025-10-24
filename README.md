@@ -69,7 +69,7 @@ pip install -r requirements.txt
 
 streamlit run Home.py
 
-###➡️ Acesse no navegador: http://localhost:8501
+### ➡️ Acesse no navegador: http://localhost:8501
 
 ---
 
@@ -93,7 +93,6 @@ projetointegrador_iv/
 │
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
-
 ---
 
 ## 🗺️ **Módulo: Dashboard Interativo**
