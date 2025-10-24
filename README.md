@@ -75,7 +75,7 @@ streamlit run Home.py
 
 ## 🗂️ **Estrutura do Projeto**
 
-'''text
+'''
 projetointegrador_iv/
 │
 ├── Home.py                         # Página inicial do sistema
