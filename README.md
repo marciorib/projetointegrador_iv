@@ -74,7 +74,7 @@ streamlit run Home.py
 ---
 
 ## 🗂️ **Estrutura do Projeto**
-
+'''
 projetointegrador_iv/
 │
 ├── Home.py                         # Página inicial do sistema
@@ -93,6 +93,7 @@ projetointegrador_iv/
 │
 ├── Relatorio_Final_PI-IV_Grupo07.docx
 └── README.md
+'''
 ---
 
 ## 🗺️ **Módulo: Dashboard Interativo**
