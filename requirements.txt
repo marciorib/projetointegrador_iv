@@ -1,14 +1,37 @@
-requests==2.31.0
-pandas==2.2.2
-streamlit==1.38.0
-pydeck==0.9.1
-streamlit-aggrid==1.0.5
+# ----------------------------
+# Dashboard SPTrans - UNIVESP
+# Projeto Integrador IV - Grupo 07
+# ----------------------------
+
+# Web framework
+streamlit==1.39.0
+
+# Manipulação de dados
+pandas==2.2.3
+numpy==1.26.4
 
 # Visualização
+plotly==5.24.1
+pydeck==0.9.1
 matplotlib==3.9.2
-seaborn==0.13.2
-plotly==5.24.0
 
 # Machine Learning
-scikit-learn==1.5.1
-numpy==1.26.4
+scikit-learn==1.5.2
+
+# Geolocalização (busca por bairro/rua)
+geopy==2.4.1
+
+# Estilização e cores
+matplotlib-colors==0.1.2
+
+# Controle de avisos
+warnings==0.1.2  # (não é um pacote real, mas mantido apenas como comentário)
+# Comentário: o módulo warnings é nativo do Python, não requer instalação
+
+# Sistema operacional e arquivos
+pathlib==1.0.1
+
+# ----------------------------
+# Fim do arquivo
+# ----------------------------
+
