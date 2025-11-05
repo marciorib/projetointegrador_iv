@@ -1,11 +1,12 @@
 # 
 
-'''Então vamos aproveitar aquele script que você já tem que coleta posições de ônibus e salva em CSV e adaptá-lo para treinar um modelo simples.
+'''aproveitando aquele script que já temos que coleta posições de ônibus e salva em CSV e adaptá-lo para treinar um modelo simples.
 
-⚠️ Importante: os dados que você tem atualmente (prefixo, latitude, longitude, hora_coleta) ainda não incluem o tempo até chegar em uma parada (que seria a variável alvo do modelo).
-Pra demonstrar o pipeline de ML, vou simular esse tempo_chegada_min a partir do horário (pra você ver funcionando). Depois, quando você enriquecer seu CSV (por exemplo com API /Previsao da SPTrans), basta substituir essa coluna simulada.'''
+⚠️ Importante: os dados que temos atualmente (prefixo, latitude, longitude, hora_coleta) ainda não incluem o tempo até chegar em uma parada (que seria a variável alvo do modelo).
+Pra demonstrar o pipeline de ML, vamos simular esse tempo_chegada_min a partir do horário (pra vermos funcionando). Depois, quando enriquecer o CSV 
+(por exemplo com API /Previsao da SPTrans), basta substituir essa coluna simulada.
 
-
+'''
 
 
 
@@ -73,4 +74,4 @@ Adiciona (por enquanto) um tempo_chegada_min simulado.
 
 Treina e avalia o modelo.
 
-Faz uma previsão de chegada.'''
+Faz uma previsão de chegada. belê?'''

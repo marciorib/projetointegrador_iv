@@ -1,5 +1,5 @@
 
-'''isso vai deixar seus dados bem mais úteis para o machine learning depois.
+'''isso vai deixar os dados bem mais úteis para o machine learning depois.
 Vamos transformar o coletor em algo contínuo que grava dados a cada X minutos no mesmo CSV, criando um histórico.'''
 
 '''Como funciona
@@ -12,7 +12,8 @@ Acrescenta no mesmo arquivo CSV (onibus_linha_8000.csv).
 
 Vai criando um histórico com hora da coleta + posição de cada ônibus.
 
-Você pode interromper a qualquer momento com CTRL+C.'''
+Você pode interromper a qualquer momento com CTRL+C.
+       obs atente para quantidade de registro, não temos servidor, se deixar rodando vai travar o PC'''
 
 import requests
 import pandas as pd

@@ -1,4 +1,4 @@
-# Dashboard SPTrans - Resumo da Sessão
+# Dashboard SPTrans - Resumo
 
 ## 1. Erro identificado
 

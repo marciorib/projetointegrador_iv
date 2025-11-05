@@ -1,25 +1,30 @@
 
-#montar um mini protótipo em Python que:
-#Autentica na API da SPTrans.
-#Busca uma linha de ônibus pelo número.
-#Captura a posição em tempo real dos ônibus dessa linha.
-#Salva os dados em um CSV para você analisar depois.
+'''
+Pessoa objetivo
+montar um mini protótipo em Python que:
+
+        #Autentica na API da SPTrans. - ok ja tenho a chave
+        #Busca uma linha de ônibus pelo número.
+        #Captura a posição em tempo real dos ônibus dessa linha.
+        #Salva os dados em um CSV para você analisar depois.
 
 # codigo (abaixo)
 
-#O que esse script faz ---------------------------------------------------
+O que esse script faz ---------------------------------------------------
 
-#Faz login com seu token da SPTrans.
+#Faz login com seu token da SPTrans. - ok funfando
 #Procura a linha de ônibus (exemplo: 8000).
 #Pega todos os ônibus em circulação dessa linha, com prefixo, latitude, longitude.
 #Marca a hora da coleta.
 #Salva em CSV (exemplo: onibus_linha_8000.csv).
 
-#A partir daqui você pode:  ----------------------------------------------------
+A partir daqui podemos:  ----------------------------------------------------
 
-#Rodar o script várias vezes ao longo do dia e ir acumulando dados.
+#Rodar o script várias vezes ao longo do dia e ir acumulando dados. 
+              obs. galera! vamos pegar apenas uma amostra, se deixar o .bat rodando 24h serão quase 1 bilhão de registro num unico dia, haja memoria...
 #Usar esses CSVs para treinar um modelo de ML (previsão de chegada, análise de atrasos, etc.).
 #Criar uma interface com Streamlit mostrando os ônibus num mapa interativo.
+'''
 
 
 

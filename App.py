@@ -96,24 +96,3 @@ if st.button("🔎 Buscar ônibus"):
         r = pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip={"text": "Ônibus {prefixo}"})
         st.pydeck_chart(r)
 
-
-
-
-
-
-# 📌 Como rodar
-
-#Instale as dependências:
-#pip install streamlit requests pandas pydeck
-
-#Rode o dashboard:
-#streamlit run app.py
-
-
-#No navegador vai abrir em:
-#👉 http://localhost:8501
-
-#Lá você digita o número da linha (ex: 8000) e verá:
-#Uma tabela com prefixo, latitude, longitude e horário de coleta.
-#Um mapa interativo mostrando os ônibus em tempo real.
-#👉 Esse protótipo já é suficiente para você mostrar a parte de IoT (dados em tempo real) e interface de visualização no seu projeto.

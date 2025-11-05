@@ -1,15 +1,49 @@
 import streamlit as st
-from datetime import datetime
 from pathlib import Path
+import os
+from PIL import Image
 
 # ------------------------------
-# Configuração da Página
+# Configurações da página
 # ------------------------------
 st.set_page_config(
-    page_title="Apresentação - Projeto Integrador IV",
-    page_icon="🚌",
-    layout="wide"
+    page_title="Dashboard SPTrans - UNIVESP",
+    layout="wide",
+    page_icon="🚌"
 )
+
+# ------------------------------
+# CSS personalizado
+# ------------------------------
+st.markdown("""
+<style>
+.stApp {
+    background-color: #0e1117;
+    color: #ffffff;
+    font-family: "Segoe UI", sans-serif;
+}
+h1, h2, h3 {
+    color: #21c4ff;
+}
+p {
+    font-size: 18px;
+}
+.stButton>button {
+    background-color: #21c4ff;
+    color: black;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.6em 1.2em;
+}
+.stButton>button:hover {
+    background-color: #15a7db;
+    color: white;
+}
+img {
+    border-radius: 12px;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # ------------------------------
 # Diretórios e imagens
@@ -22,177 +56,79 @@ SCREEN_MAP = IMG_DIR / "screenshot_mapa.png"
 SCREEN_CHART = IMG_DIR / "screenshot_grafico.png"
 
 # ------------------------------
-# Estilo customizado
+# Função de exibição segura de imagem
 # ------------------------------
-st.markdown("""
-    <style>
-    .stApp {
-        background-color: #0e1117;
-        color: white;
-        font-family: "Segoe UI", sans-serif;
-    }
-    h1, h2, h3 {
-        color: #61dafb;
-        font-weight: 600;
-    }
-    .card {
-        background-color: #161a23;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 0 6px rgba(33, 196, 255, 0.08);
-        margin-bottom: 20px;
-    }
-    .tech {
-        display: inline-block;
-        background: #21c4ff;
-        color: black;
-        padding: 5px 10px;
-        border-radius: 10px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        font-size: 14px;
-        font-weight: 600;
-    }
-    /* BOTÃO ANIMADO */
-    .animated-btn {
-        background: linear-gradient(135deg, #21c4ff, #00aaff);
-        color: black;
-        font-weight: 700;
-        padding: 16px 36px;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        font-size: 20px;
-        box-shadow: 0px 6px 15px rgba(33,196,255,0.4);
-        transition: all 0.3s ease-in-out;
-        transform: perspective(500px) translateZ(0);
-    }
-    .animated-btn:hover {
-        transform: perspective(500px) translateZ(10px);
-        background: linear-gradient(135deg, #00b3f0, #009fe3);
-        box-shadow: 0px 10px 25px rgba(33,196,255,0.6);
-    }
-    .animated-btn:active {
-        transform: perspective(500px) translateZ(3px);
-        box-shadow: 0px 4px 10px rgba(33,196,255,0.4);
-    }
-    .center {
-        text-align: center;
-        margin-top: 30px;
-    }
-    </style>
-""", unsafe_allow_html=True)
+def mostrar_imagem_segura(caminho, legenda):
+    """Exibe imagem se existir, caso contrário mostra aviso elegante."""
+    if os.path.exists(caminho):
+        st.image(str(caminho), caption=legenda, use_container_width=True)
+    else:
+        st.warning(f"⚠️ Imagem '{Path(caminho).name}' não encontrada na pasta 'img'.")
 
 # ------------------------------
-# Cabeçalho
+# Cabeçalho da Home
 # ------------------------------
-if LOGO_PATH.exists():
-    st.image(str(LOGO_PATH), width=250)
-else:
-    st.warning("⚠️ Logo não encontrada em: 'img/Univesp_logo_jpg_cmyk-487x287.jpg'")
+col1, col2 = st.columns([1, 4])
 
-st.title("🚌 Projeto Integrador IV - Dashboard SPTrans")
-st.markdown(f"**Última atualização:** {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+with col1:
+    if os.path.exists(LOGO_PATH):
+        st.image(str(LOGO_PATH), width=150)
+    else:
+        st.warning("⚠️ Logotipo da UNIVESP não encontrado.")
+
+with col2:
+    st.title("🚌 Dashboard SPTrans - Projeto Integrador IV")
+    st.markdown("### _Análise e Visualização de Dados do Transporte Público Urbano de São Paulo_")
 
 st.markdown("---")
 
 # ------------------------------
-# Introdução
+# Descrição do projeto
 # ------------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("📘 Sobre o Projeto")
 st.markdown("""
-O **Dashboard SPTrans** é uma aplicação interativa desenvolvida no contexto do **Projeto Integrador IV da UNIVESP**,  
-com o objetivo de **monitorar, visualizar e analisar dados em tempo real** sobre a frota de ônibus da cidade de São Paulo.  
-A ferramenta utiliza dados públicos da SPTrans e tecnologias de visualização para apoiar estudos sobre **mobilidade urbana**  
-e **eficiência do transporte público**.
-""")
-st.markdown('</div>', unsafe_allow_html=True)
+## 🎯 Objetivo do Projeto
+O **Dashboard SPTrans** tem como finalidade analisar e visualizar dados do transporte público urbano
+de São Paulo em tempo real, utilizando **Ciência de Dados**, **Machine Learning** e **Visualização Interativa**.
 
-# ------------------------------
-# Objetivos
-# ------------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("🎯 Objetivos")
-st.markdown("""
-- Consolidar e exibir dados de localização da frota em tempo real;  
-- Permitir análise geográfica interativa de linhas e trajetos;  
-- Oferecer indicadores sobre horários e distribuição operacional;  
-- Apoiar estudos e decisões relacionadas à mobilidade urbana sustentável.  
-""")
-st.markdown('</div>', unsafe_allow_html=True)
-
-# ------------------------------
-# Tecnologias
-# ------------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("🧰 Tecnologias Utilizadas")
-for tech in ["Python", "Streamlit", "Pandas", "Plotly", "Pydeck", "GitHub", "Machine Learning (em desenvolvimento)"]:
-    st.markdown(f"<span class='tech'>{tech}</span>", unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
-
-# ------------------------------
-# Resultados Preliminares
-# ------------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("📊 Resultados Preliminares")
-st.markdown("""
-A primeira versão do dashboard apresenta:
-- Visualização geográfica da frota em tempo real;  
-- Filtros dinâmicos por linha, horário e trajeto;  
-- Gráficos interativos sobre a operação diária.  
+A plataforma foi desenvolvida com **Python + Streamlit**, permitindo que usuários explorem:
+- A localização e movimentação dos ônibus;
+- Linhas em operação e seus trajetos;
+- Previsões de quantidade de veículos ativos por hora (via Aprendizado de Máquina);
+- Simulação temporal da movimentação ao longo do dia.
 """)
 
-col1, col2 = st.columns(2)
-with col1:
-    if SCREEN_MAP.exists():
-        st.image(str(SCREEN_MAP), caption="Mapa Interativo - Distribuição da Frota", use_container_width=True)
-    else:
-        st.info("📍 Imagem 'screenshot_mapa.png' não encontrada na pasta 'img'.")
+# ------------------------------
+# Imagens principais
+# ------------------------------
+st.markdown("---")
+st.markdown("## 🗺️ Visualização do Mapa Interativo")
+mostrar_imagem_segura(SCREEN_MAP, "Mapa Interativo - Distribuição da Frota")
 
-with col2:
-    if SCREEN_CHART.exists():
-        st.image(str(SCREEN_CHART), caption="Gráfico de Distribuição por Horário", use_container_width=True)
-    else:
-        st.info("📊 Imagem 'screenshot_grafico.png' não encontrada na pasta 'img'.")
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("## 📊 Gráfico de Distribuição de Ônibus")
+mostrar_imagem_segura(SCREEN_CHART, "Gráfico - Distribuição de Ônibus ao Longo do Dia")
+
+st.markdown("---")
 
 # ------------------------------
-# Equipe
+# Botão para acessar o Dashboard
 # ------------------------------
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.subheader("👥 Equipe do Projeto")
-st.markdown("""
-**Turma:** 01 – **Grupo:** 07  
-**Orientador:** Prof. Vinícius Marcelo Pereira  
+st.markdown("## 🚀 Acesse o Dashboard Completo")
 
-**Integrantes:**  
-- ALEX DE ALMEIDA CRUZ, 2208970
-- BÁRBARA HAYDEE PRESENTE, 2214684
-- CARLOS ALBERTO MORAL JUNIOR, 2203786
-- ELIANA APARECIDA RIBEIRO BUDIN, 2208956
-- MARCIO ANTONIO RIBEIRO, 226928
-- ROGERIO LEONEL DOS SANTOS, 2220619
-- SERGIO LUIZ AUGUSTO DIAS, 2203760
-  
-""")
-st.markdown('</div>', unsafe_allow_html=True)
-
-# ------------------------------
-# BOTÃO ANIMADO - ACESSAR DASHBOARD
-# ------------------------------
-st.markdown('<div class="card center">', unsafe_allow_html=True)
-st.subheader("🌐 Acesse o Dashboard Interativo")
-
-if st.button("🚀 Acessar o Dashboard", key="btn_dashboard"):
-    js = "window.location.href = '/dashboardapp';"
+if st.button("Acessar Dashboard SPTrans"):
+    js = "window.open('http://localhost:8501/dashboard_SPTrans', '_self')"
     st.markdown(f"<script>{js}</script>", unsafe_allow_html=True)
 
+st.info("🔹 Clique no botão acima para abrir o Dashboard principal.")
+
+# ------------------------------
+# Rodapé
+# ------------------------------
+st.markdown("---")
 st.markdown("""
-<p style="color:#bbbbbb;">
-💡 <b>Dica:</b> Caso o botão não redirecione automaticamente,  
-use o <b>menu lateral</b> e selecione  
-<b>📊 Dashboard SPTrans - Ônibus em Tempo Real</b>.
-</p>
+<div style='text-align: center; color: #cccccc;'>
+    <p>📍 <b>UNIVESP – Universidade Virtual do Estado de São Paulo</b></p>
+    <p>👨‍💻 Projeto Integrador IV – Engenharia de Computação e Ciência de Dados</p>
+    <p>🧩 Grupo 07 – Polo Bauru | Orientador: Prof. Vinício Marcelo Pereira</p>
+    <p>© 2025 – Todos os direitos reservados</p>
+</div>
 """, unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
