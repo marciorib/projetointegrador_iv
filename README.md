@@ -13,6 +13,18 @@
 </div>
 ---
 
+## 👨‍🏫 **Grupo**
+
+ALEX DE ALMEIDA CRUZ, 2208970
+BÁRBARA HAYDEE PRESENTE, 2214684
+CARLOS ALBERTO MORAL JUNIOR, 2203786
+ELIANA APARECIDA RIBEIRO BUDIN, 2208956
+MARCIO ANTONIO RIBEIRO, 226928
+ROGERIO LEONEL DOS SANTOS, 2220619
+SERGIO LUIZ AUGUSTO DIAS, 2203760
+
+---
+
 ## 🧩 **Descrição do Projeto**
 
 O **Dashboard SPTrans** foi desenvolvido como parte do **Projeto Integrador IV da UNIVESP**, com o objetivo de **analisar, visualizar e prever a movimentação da frota de ônibus da cidade de São Paulo**.  

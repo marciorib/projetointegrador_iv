@@ -26,7 +26,7 @@ Esta versão consolida todas as funcionalidades principais, correções e melhor
 ---
 
 ## 🧠 Tecnologias Utilizadas
-Python 3.11 • Streamlit • Pandas • Plotly • PyDeck • Scikit-learn • Matplotlib • GitHub  
+Python 3.11  • Streamlit  • Pandas  • Plotly  • PyDeck  • Scikit-learn  • Matplotlib • GitHub  
 
 ---
 
